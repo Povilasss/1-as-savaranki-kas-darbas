@@ -44,12 +44,42 @@ int main()
 				cin >> laikinas;
 				if (laikinas == 1) { system("CLS"); sansas = moksl.Pagrindinis(); };
 			};
-
-			cout << "Pavarde" << setw(13) << "Vardas" << setw(25) << "Galutinis(vid/med)" << setw(15) << endl;
-			cout << "---------------------------------------------" << endl;
-			cout << endl << "1 = Grizti i pagrindini" << endl;
-			cin >> laikinas;
-			if (laikinas == 1) { system("CLS"); sansas = moksl.Pagrindinis(); };
+			while (sansas == 4) {
+				static int checked = 0;
+				if (checked == 0) {
+					ifstream datafile;
+					datafile.open("kursiokai.txt");
+					string str = "null", fvardas = "null", fpavarde = "null";
+					double rez = 0;
+					string arr[50];
+					getline(datafile, str);
+					int counter = wordnum(str);
+					while (datafile.peek() != EOF) {
+						getline(datafile, str);
+						stringstream ss(str);
+						for (int i = 0; i < counter; i++) {
+							ss >> arr[i];
+							if (i == 0) { fvardas = arr[i]; }
+							else if (i == 1) { fpavarde = arr[i]; }
+							else if (i > 1 and i + 1 < counter) { givert.push_back(stoi(arr[i])); }
+							else if (i + 1 == counter) { rez = stoi(arr[i]); }
+						};
+						Mokiniai fmoksl(fvardas, fpavarde, givert, rez);
+						sarasas.push_back(fmoksl);
+						givert.clear();
+					};
+					checked++;
+					sort(sarasas.begin(), sarasas.end(), [](const Mokiniai& lhs, const Mokiniai& rhs) {return lhs.vardas < rhs.vardas; });
+				};
+				
+				cout << "Pavarde" << setw(13) << "Vardas" << setw(25) << "Galutinis(vid/med)" << setw(15) << endl;
+				cout << "---------------------------------------------" << endl;
+				for (int i = 0; i < sarasas.size(); i++) { sarasas[i].SpausdintiFaila(); }
+				cout << endl << "1 = Grizti i pagrindini" << endl;
+				cin >> laikinas;
+				if (laikinas == 1) { system("CLS"); sansas = moksl.Pagrindinis(); };
+			}
+			while (sansas == 5) { sansas = 0; };
 		}
 		catch (int ExceptionERR) {
 			cout << "ERROR 404: Menu option does not exist" << endl;

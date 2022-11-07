@@ -35,7 +35,8 @@ int Mokiniai::Pagrindinis() {
 	cout << "1 = Vesti mokinio duomenis" << endl;
 	cout << "2 = Nuskaityti mokinio duomenis ir isvesti vidurki" << endl;
 	cout << "3 = Nuskaityti mokinio duomenis ir isvesti mediana" << endl;
-	cout << "4 = Iseiti " << endl;
+	cout << "4 = Nuskaityti duomenis is failo ir surusiuoti pagal vardus " << endl;
+	cout << "5 = Iseiti " << endl;
 	cin >> vest;
 	system("CLS");
 	return vest;
@@ -46,6 +47,13 @@ void Mokiniai::SpausdintiMediana() {
 	double givert = (0.4 * math) + (0.6 * galutinis);
 	nth_element(pazymiai.begin(), pazymiai.begin() + pazymiai.size() / 2, pazymiai.end());
 	cout << left << setw(15) << pavarde << left << setw(15) << vardas << setprecision(2) << givert << "/" << "(" << pazymiai[pazymiai.size() / 2] << ")" << endl;
+}
+
+void Mokiniai::SpausdintiFaila() {
+	double math = accumulate(pazymiai.begin(), pazymiai.end(), 0.0) / pazymiai.size();
+	double givert = (0.4 * math) + (0.6 * galutinis);
+	nth_element(pazymiai.begin(), pazymiai.begin() + pazymiai.size() / 2, pazymiai.end());
+	cout << left << setw(15) << pavarde << left << setw(15) << vardas << setprecision(2) << givert << "/" << setprecision(2) << "(" << math << ")" << "(" << pazymiai[pazymiai.size() / 2] << ")" << endl;
 };
 
 istream& operator >> (istream& input, Mokiniai& x) {

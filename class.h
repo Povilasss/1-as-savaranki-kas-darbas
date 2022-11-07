@@ -15,6 +15,7 @@ public:
 	int Pagrindinis();
 	void TrintiPazymius();
 	void SpausdintiMediana();
+	void SpausdintiFaila();
 
 	friend istream& operator >>(istream& input, Mokiniai& x);
 	friend ostream& operator <<(ostream& output, const Mokiniai& x);
