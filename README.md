@@ -9,5 +9,5 @@
 
 ***4.Mokinių balų rezultatų išvedimas mediana***
 
-*** ***
-*** ***
+***5.Mokiniai sūrušiuojami ir išvedami iš failo***
+
